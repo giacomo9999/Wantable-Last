@@ -13,7 +13,7 @@ class App extends Component {
   handleInputChange = (e) => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   submitArtist = (e) => {
@@ -30,7 +30,6 @@ class App extends Component {
       )
       .then(
         (response) => {
-          // console.log(response.data.results.artistmatches.artist);
           const possibleArtists = [];
           response.data.results.artistmatches.artist.forEach((entry) => {
             possibleArtists.push(entry.name);
@@ -47,6 +46,10 @@ class App extends Component {
       );
   };
 
+  showDiscography = (artist) => {
+    console.log("showDiscography for artist..." + artist);
+  };
+
   render() {
     return (
       <div className="container-outer">
@@ -56,7 +59,10 @@ class App extends Component {
           submitArtist={this.submitArtist}
         />
         {this.state.possibleArtistsPanelOpen === true ? (
-          <PossibleMatchesList possibleArtists={this.state.possibleArtists} />
+          <PossibleMatchesList
+            possibleArtists={this.state.possibleArtists}
+            showDiscography={this.showDiscography}
+          />
         ) : (
           <div className="container-inner" />
         )}
