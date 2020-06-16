@@ -23,7 +23,7 @@ class App extends Component {
 
     axios
       .get(
-        "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=blue_oyster_cult&api_key=0fee157d3e08962839adacc77a33744c&format=json"
+        `http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=blue_oyster_cult&api_key=${process.env.REACT_APP_LAST_API_KEY}&format=json`
       )
       .then(
         (response) => {
