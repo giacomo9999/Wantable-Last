@@ -1,1 +1,1 @@
-Simple React app that queries the Last.fm music database and returns results
+Simple React app that queries the Last.fm music database and returns results.
