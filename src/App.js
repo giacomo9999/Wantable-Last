@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import ArtistSubmitForm from "./ArtistSubmitForm";
+import PossibleMatchesList from "./PossibleMatchesList";
 import axios from "axios";
 
 class App extends Component {
-  state = { artistName: "", resultsPanelOpen: false };
+  state = {
+    artistName: "",
+    possibleArtistsPanelOpen: false,
+    possibleArtists: [],
+  };
 
   handleInputChange = (e) => {
     e.preventDefault();
@@ -16,18 +21,25 @@ class App extends Component {
     console.log(
       `submitArtist here...submitting ${this.state.artistName} to Last.fm database`
     );
-    this.setState({
-      artistName: "",
-      resultsPanelOpen: false,
-    });
+
+    const formattedArtistName = this.state.artistName.toLowerCase();
 
     axios
       .get(
-        `http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=blue_oyster_cult&api_key=${process.env.REACT_APP_LAST_API_KEY}&format=json`
+        `http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${formattedArtistName}&api_key=${process.env.REACT_APP_LAST_API_KEY}&format=json`
       )
       .then(
         (response) => {
-          console.log(response.data);
+          // console.log(response.data.results.artistmatches.artist);
+          const possibleArtists = [];
+          response.data.results.artistmatches.artist.forEach((entry) => {
+            possibleArtists.push(entry.name);
+          });
+          this.setState({
+            possibleArtistsPanelOpen: true,
+            possibleArtists: possibleArtists,
+          });
+          console.log(this.state);
         },
         (error) => {
           console.log(error);
@@ -43,6 +55,11 @@ class App extends Component {
           handleInputChange={this.handleInputChange}
           submitArtist={this.submitArtist}
         />
+        {this.state.possibleArtistsPanelOpen === true ? (
+          <PossibleMatchesList possibleArtists={this.state.possibleArtists} />
+        ) : (
+          <div className="container-inner" />
+        )}
       </div>
     );
   }
