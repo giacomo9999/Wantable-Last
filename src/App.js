@@ -76,7 +76,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container-outer">
+      <div className="container-outer" data-test="component-app">
         <ArtistSubmitForm
           tempArtistName={this.state.tempArtistName}
           handleInputChange={this.handleInputChange}

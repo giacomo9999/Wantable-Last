@@ -12,7 +12,10 @@ const PossibleMatchesList = (props) => {
     </tr>
   ));
   return (
-    <div className="container-inner">
+    <div
+      className="container-inner"
+      data-test="component-possible-matches-list"
+    >
       <h1>Possible Matches</h1>
       <table>
         <tbody>{matchList}</tbody>
