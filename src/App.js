@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import ArtistSubmitForm from "./ArtistSubmitForm";
 import PossibleMatchesList from "./PossibleMatchesList";
+import BioDiscoList from "./BioDiscoList";
 import axios from "axios";
 
 class App extends Component {
   state = {
     artistName: "",
+    artistBio: "",
+    artistDiscography: [],
+    bioDiscoPanelOpen: false,
     possibleArtistsPanelOpen: false,
     possibleArtists: [],
   };
@@ -48,6 +52,24 @@ class App extends Component {
 
   showDiscography = (artist) => {
     console.log("showDiscography for artist..." + artist);
+    axios
+      .get(
+        `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${process.env.REACT_APP_LAST_API_KEY}&format=json`
+      )
+      .then(
+        (response) => {
+          console.log(response);
+          this.setState({
+            possibleArtistsPanelOpen: false,
+            bioDiscoPanelOpen: true,
+            artistName: artist,
+            artistBio: response.data.artist.bio.summary,
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
 
   render() {
@@ -64,7 +86,15 @@ class App extends Component {
             showDiscography={this.showDiscography}
           />
         ) : (
-          <div className="container-inner" />
+          <div />
+        )}
+        {this.state.bioDiscoPanelOpen === true ? (
+          <BioDiscoList
+            artistName={this.state.artistName}
+            artistBio={this.state.artistBio}
+          />
+        ) : (
+          <div />
         )}
       </div>
     );
