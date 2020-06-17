@@ -4,7 +4,10 @@ import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import App from "./App";
 
+
 Enzyme.configure({ adapter: new EnzymeAdapter() });
+
+
 
 test("renders without error", () => {
   const wrapper = shallow(<App />);
@@ -12,6 +15,8 @@ test("renders without error", () => {
   expect(appComponent.length).toBe(1);
 });
 
-test("tempArtistName starts as empty string", () => {});
-
-test("clicking 'submit' invokes 'submitArtist' function", () => {});
+test("tempArtistName starts as empty string", () => {
+  const wrapper = shallow(<App />);
+  let initialTempArtistState = wrapper.state("tempArtistName");
+  expect(initialTempArtistState).toBe("");
+});

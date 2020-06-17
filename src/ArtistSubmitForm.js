@@ -14,7 +14,7 @@ const ArtistSubmitForm = (props) => {
           value={props.tempArtistName}
         />
         <br />
-        <button>Submit</button>
+        <button data-test="submit-button">Submit</button>
       </form>
     </div>
   );
