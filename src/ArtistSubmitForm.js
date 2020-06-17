@@ -10,8 +10,8 @@ const ArtistSubmitForm = (props) => {
           className="h-input"
           onChange={props.handleInputChange}
           type="text"
-          name="artistName"
-          value={props.artistName}
+          name="tempArtistName"
+          value={props.tempArtistName}
         />
         <br />
         <button>Submit</button>

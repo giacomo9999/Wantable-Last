@@ -6,8 +6,8 @@ import axios from "axios";
 
 class App extends Component {
   state = {
-    artistName: "",
     tempArtistName: "",
+    artistName: "",
     artistBio: "",
     artistDiscography: [],
     bioDiscoPanelOpen: false,
@@ -24,10 +24,10 @@ class App extends Component {
   submitArtist = (e) => {
     e.preventDefault();
     console.log(
-      `submitArtist here...submitting ${this.state.artistName} to Last.fm database`
+      `submitArtist here...submitting ${this.state.tempArtistName} to Last.fm database`
     );
 
-    const formattedArtistName = this.state.artistName.toLowerCase();
+    const formattedArtistName = this.state.tempArtistName.toLowerCase();
 
     axios
       .get(
@@ -40,6 +40,7 @@ class App extends Component {
             possibleArtists.push(entry.name);
           });
           this.setState({
+            tempArtistName: "",
             possibleArtistsPanelOpen: true,
             possibleArtists: possibleArtists,
           });
@@ -77,7 +78,7 @@ class App extends Component {
     return (
       <div className="container-outer">
         <ArtistSubmitForm
-          artistName={this.state.artistName}
+          tempArtistName={this.state.tempArtistName}
           handleInputChange={this.handleInputChange}
           submitArtist={this.submitArtist}
         />
