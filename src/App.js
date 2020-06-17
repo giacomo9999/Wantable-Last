@@ -23,9 +23,9 @@ class App extends Component {
 
   submitArtist = (e) => {
     e.preventDefault();
-    console.log(
-      `submitArtist here...submitting ${this.state.tempArtistName} to Last.fm database`
-    );
+    // console.log(
+    //   `submitArtist here...submitting ${this.state.tempArtistName} to Last.fm database`
+    // );
 
     const formattedArtistName = this.state.tempArtistName.toLowerCase();
 
@@ -44,7 +44,7 @@ class App extends Component {
             possibleArtistsPanelOpen: true,
             possibleArtists: possibleArtists,
           });
-          console.log(this.state);
+          // console.log(this.state);
         },
         (error) => {
           console.log(error);
@@ -60,7 +60,7 @@ class App extends Component {
       )
       .then(
         (response) => {
-          console.log(response);
+          // console.log(response);
           this.setState({
             possibleArtistsPanelOpen: false,
             bioDiscoPanelOpen: true,
