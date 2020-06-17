@@ -13,9 +13,11 @@ const BioDiscoList = (props) => {
   //   ));
   return (
     <div className="container-inner">
-      <h1>Artist Bio</h1>
-      <h2>{props.artistName}</h2>
-      <p>{props.artistBio}</p>
+      <h1>{props.artistName}</h1>
+      <div className="text-block" style={{ textAlign: "left" }}>
+        <p>{props.artistBio}</p>
+      </div>
+
       {/* <table>
         <tbody>{matchList}</tbody>
       </table> */}

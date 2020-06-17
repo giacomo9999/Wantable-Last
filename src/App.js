@@ -7,6 +7,7 @@ import axios from "axios";
 class App extends Component {
   state = {
     artistName: "",
+    tempArtistName: "",
     artistBio: "",
     artistDiscography: [],
     bioDiscoPanelOpen: false,
@@ -63,7 +64,7 @@ class App extends Component {
             possibleArtistsPanelOpen: false,
             bioDiscoPanelOpen: true,
             artistName: artist,
-            artistBio: response.data.artist.bio.summary,
+            artistBio: response.data.artist.bio.summary.split("<")[0],
           });
         },
         (error) => {
